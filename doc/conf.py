@@ -8,6 +8,7 @@ import re
 
 from sphinx.cmd.build import get_parser
 import sphinx_rtd_theme
+import mlx.traceability
 
 
 args = get_parser().parse_args()
@@ -84,6 +85,7 @@ extensions = [
     "notfound.extension",
     "sphinx_copybutton",
     "zephyr.external_content",
+    "mlx.traceability",
 ]
 
 # Only use SVG converter when it is really needed, e.g. LaTeX.
@@ -120,7 +122,7 @@ html_theme_options = {
 html_title = "Zephyr Project Documentation"
 html_logo = str(ZEPHYR_BASE / "doc" / "_static" / "images" / "logo.svg")
 html_favicon = str(ZEPHYR_BASE / "doc" / "_static" / "images" / "favicon.png")
-html_static_path = [str(ZEPHYR_BASE / "doc" / "_static")]
+html_static_path = [os.path.join(os.path.dirname(mlx.traceability.__file__), 'assets'), str(ZEPHYR_BASE / "doc" / "_static") ]
 html_last_updated_fmt = "%b %d, %Y"
 html_domain_indices = False
 html_split_index = True
@@ -276,6 +278,8 @@ graphviz_dot_args = [
     "-Nfontcolor=gray25",
     "-Ecolor=gray60",
 ]
+
+# -- traceability options -------------------------------------------------
 
 # -- Linkcheck options ----------------------------------------------------
 
