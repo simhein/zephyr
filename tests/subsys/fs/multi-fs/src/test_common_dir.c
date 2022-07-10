@@ -48,8 +48,8 @@ int test_mkdir(const char *dir_path, const char *file)
 		return res;
 	}
 
-	TC_PRINT("Testing write to file %s\n", file_path);
-	res = test_file_write(&filep, "NOTHING");
+	TC_PRINT("Testing write to file %s and read from it\n", file_path);
+	res = test_file_write_read(&filep, "NOTHING");
 	if (res) {
 		fs_close(&filep);
 		return res;

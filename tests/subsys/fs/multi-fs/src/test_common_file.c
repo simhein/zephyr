@@ -33,12 +33,14 @@ int test_file_open(struct fs_file_t *filep, const char *file_path)
 	return res;
 }
 
-int test_file_write(struct fs_file_t *filep, const char *test_str)
+int test_file_write_read(struct fs_file_t *filep, const char *test_str)
 {
 	ssize_t brw;
 	int res;
+	char read_buff[80];
+	size_t sz = strlen(test_str);
 
-	TC_PRINT("\nWrite tests:\n");
+	TC_PRINT("\nWrite and read tests:\n");
 
 	/* Verify fs_seek() */
 	res = fs_seek(filep, 0, FS_SEEK_SET);
@@ -66,25 +68,6 @@ int test_file_write(struct fs_file_t *filep, const char *test_str)
 	}
 
 	TC_PRINT("Data successfully written!\n");
-
-	return res;
-}
-
-int test_file_read(struct fs_file_t *filep, const char *test_str)
-{
-	ssize_t brw;
-	int res;
-	char read_buff[80];
-	size_t sz = strlen(test_str);
-
-	TC_PRINT("\nRead tests:\n");
-
-	res = fs_seek(filep, 0, FS_SEEK_SET);
-	if (res) {
-		TC_PRINT("fs_seek failed [%d]\n", res);
-		fs_close(filep);
-		return res;
-	}
 
 	/* Verify fs_read() */
 	brw = fs_read(filep, read_buff, sz);

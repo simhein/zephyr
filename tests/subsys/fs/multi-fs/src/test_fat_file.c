@@ -18,22 +18,18 @@ ZTEST(multifs_fs_dir_file, test_fat_open)
 		NULL);
 }
 
-ZTEST(multifs_fs_dir_file, test_fat_write)
+ZTEST(multifs_fs_dir_file, test_fat_write_read)
 {
-	TC_PRINT("Write to file %s\n", TEST_FILE_PATH);
-	zassert_true(test_file_write(&test_file, test_str) == TC_PASS,
+	TC_PRINT("Write to file %s and read from it\n", TEST_FILE_PATH);
+	zassert_true(test_file_write_read(&test_file, test_str) == TC_PASS,
 		NULL);
-}
-
-ZTEST(multifs_fs_dir_file, test_fat_read)
-{
-	zassert_true(test_file_read(&test_file, test_str) == TC_PASS, NULL);
 }
 
 ZTEST(multifs_fs_dir_file, test_fat_close)
 {
 	zassert_true(test_file_close(&test_file) == TC_PASS, NULL);
 }
+
 ZTEST(multifs_fs_dir_file, test_fat_unlink)
 {
 	zassert_true(test_file_delete(TEST_FILE_PATH) == TC_PASS, NULL);
