@@ -6,32 +6,32 @@
 
 #include <ztest.h>
 #include "test_common.h"
+#include "test_fs_shell.h"
 #include "test_fat.h"
 #include "test_littlefs.h"
-#include "test_fs_shell.h"
 
-void test_main(void)
+void *fs_mount_setup(void)
 {
-	ztest_test_suite(multifs_fs_test,
-			 ztest_unit_test(test_clear_flash),
-			 ztest_unit_test(test_fat_mount),
-			 ztest_unit_test(test_littlefs_mount),
-			 ztest_unit_test(test_fat_mkdir),
-			 ztest_unit_test(test_littlefs_mkdir),
-			 ztest_unit_test(test_fat_readdir),
-			 ztest_unit_test(test_littlefs_readdir),
-			 ztest_unit_test(test_fat_rmdir),
-			 ztest_unit_test(test_littlefs_rmdir),
-			 ztest_unit_test(test_fat_open),
-			 ztest_unit_test(test_littlefs_open),
-			 ztest_unit_test(test_fat_write),
-			 ztest_unit_test(test_littlefs_write),
-			 ztest_unit_test(test_fat_read),
-			 ztest_unit_test(test_littlefs_read),
-			 ztest_unit_test(test_fat_close),
-			 ztest_unit_test(test_littlefs_close),
-			 ztest_unit_test(test_fat_unlink),
-			 ztest_unit_test(test_littlefs_unlink),
-			 ztest_unit_test(test_fs_help));
-	ztest_run_test_suite(multifs_fs_test);
+	int err;
+	err = fat_mount_setup();
+	zassert_true(err == 0, "fat_fs_mount setup call failure: %d", err);
+
+	err = littlefs_mount_setup();
+	zassert_true(err == 0, "littlefs_fs_mount setup call failure: %d", err);
+	return NULL;
 }
+
+void fs_unmount_teardown(void *data)
+{
+	ARG_UNUSED(data);
+	int err;
+
+	err = fat_unmount_teardown();
+	zassert_true(err == 0, "fat_fs_unmount teardown call failure: %d", err);
+
+	err = littlefs_unmount_teardown();
+	zassert_true(err == 0, "littlefs_fs_unmount teardown call failure: %d", err);
+}
+
+ZTEST_SUITE(multifs_fs_dir_file, NULL, fs_mount_setup, NULL, NULL, fs_unmount_teardown);
+ZTEST_SUITE(multifs_fs, NULL, NULL, NULL, NULL, fs_unmount_teardown);

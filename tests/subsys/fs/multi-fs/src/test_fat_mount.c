@@ -4,7 +4,6 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-#include "test_fat.h"
 #include <ff.h>
 #include "test_common.h"
 #include "test_fs_shell.h"
@@ -35,9 +34,25 @@ static int test_mount(void)
 
 	return TC_PASS;
 }
+
+int fat_mount_setup(void)
+{
+	int res;
+
+	res = fs_mount(&fatfs_mnt);
+	return res;
+}
+
+int fat_unmount_teardown(void)
+{
+	int res;
+
+	res = fs_unmount(&fatfs_mnt);
+	return res;
+}
 #endif
 
-void test_fat_mount(void)
+ZTEST(multifs_fs, test_fat_mount)
 {
 #ifdef CONFIG_FILE_SYSTEM_SHELL
 	test_fs_fat_mount();

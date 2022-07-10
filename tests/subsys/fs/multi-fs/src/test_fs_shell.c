@@ -26,7 +26,7 @@ static void test_shell_exec(const char *line, int result)
 	zassert_true(ret == result, line);
 }
 
-void test_fs_help(void)
+ZTEST(multifs_fs, test_fs_help)
 {
 #ifdef CONFIG_FILE_SYSTEM_SHELL
 	test_shell_exec("help", 0);

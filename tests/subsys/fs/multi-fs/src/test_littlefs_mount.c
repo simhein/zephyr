@@ -34,9 +34,25 @@ static int test_mount(void)
 
 	return TC_PASS;
 }
+
+int littlefs_mount_setup(void)
+{
+	int res;
+
+	res = fs_mount(&littlefs_mnt);
+	return res;
+}
+
+int littlefs_unmount_teardown(void)
+{
+	int res;
+
+	res = fs_unmount(&littlefs_mnt);
+	return res;
+}
 #endif
 
-void test_littlefs_mount(void)
+ZTEST(multifs_fs, test_littlefs_mount)
 {
 #ifdef CONFIG_FILE_SYSTEM_SHELL
 	test_fs_littlefs_mount();

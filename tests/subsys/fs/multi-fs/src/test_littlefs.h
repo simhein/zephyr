@@ -4,12 +4,5 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-void test_littlefs_mount(void);
-void test_littlefs_open(void);
-void test_littlefs_write(void);
-void test_littlefs_read(void);
-void test_littlefs_close(void);
-void test_littlefs_unlink(void);
-void test_littlefs_mkdir(void);
-void test_littlefs_readdir(void);
-void test_littlefs_rmdir(void);
+int littlefs_mount_setup(void);
+int littlefs_unmount_teardown(void);

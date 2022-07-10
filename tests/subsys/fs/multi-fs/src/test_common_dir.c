@@ -15,8 +15,6 @@
 #define PATH_MAX 4096
 #endif
 
-int test_rmdir(const char *dir_path);
-
 int test_mkdir(const char *dir_path, const char *file)
 {
 	int res;

@@ -20,7 +20,7 @@ int check_file_dir_exists(const char *fpath)
 	return !res;
 }
 
-void test_clear_flash(void)
+ZTEST(multifs_fs, test_clear_flash)
 {
 	int rc;
 	const struct flash_area *fap;
