@@ -33,7 +33,7 @@ int test_file_open(struct fs_file_t *filep, const char *file_path)
 	return res;
 }
 
-int test_file_write_read(struct fs_file_t *filep, const char *test_str)
+int test_file_write_read(struct fs_file_t *filep, const char *test_str, const char *file_path)
 {
 	ssize_t brw;
 	int res;
@@ -41,6 +41,9 @@ int test_file_write_read(struct fs_file_t *filep, const char *test_str)
 	size_t sz = strlen(test_str);
 
 	TC_PRINT("\nWrite and read tests:\n");
+
+	/* open the file */
+	test_file_open(filep, file_path);
 
 	/* Verify fs_seek() */
 	res = fs_seek(filep, 0, FS_SEEK_SET);

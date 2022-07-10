@@ -49,7 +49,7 @@ int test_mkdir(const char *dir_path, const char *file)
 	}
 
 	TC_PRINT("Testing write to file %s and read from it\n", file_path);
-	res = test_file_write_read(&filep, "NOTHING");
+	res = test_file_write_read(&filep, "NOTHING", file_path);
 	if (res) {
 		fs_close(&filep);
 		return res;

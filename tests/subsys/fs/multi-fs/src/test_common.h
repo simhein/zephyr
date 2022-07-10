@@ -12,7 +12,7 @@ void test_clear_flash(void);
 int check_file_dir_exists(const char *fpath);
 
 int test_file_open(struct fs_file_t *filep, const char *fpath);
-int test_file_write_read(struct fs_file_t *filep, const char *str);
+int test_file_write_read(struct fs_file_t *filep, const char *str, const char *file_path);
 int test_file_close(struct fs_file_t *filep);
 int test_file_delete(const char *fpath);
 

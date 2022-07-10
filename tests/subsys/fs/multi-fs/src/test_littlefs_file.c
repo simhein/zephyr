@@ -21,7 +21,7 @@ ZTEST(multifs_fs_dir_file, test_littlefs_open)
 ZTEST(multifs_fs_dir_file, test_littlefs_write_read)
 {
 	TC_PRINT("Write to file %s and read from it\n", TEST_FILE_PATH);
-	zassert_true(test_file_write_read(&test_file, test_str) == TC_PASS,
+	zassert_true(test_file_write_read(&test_file, test_str, TEST_FILE_PATH) == TC_PASS,
 		NULL);
 }
 
