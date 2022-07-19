@@ -53,7 +53,7 @@ int test_file_write_read(struct fs_file_t *filep, const char *test_str, const ch
 		return res;
 	}
 
-	TC_PRINT("Data written:\"%s\"\n\n", test_str);
+	TC_PRINT("Data to be written:\"%s\"\n\n", test_str);
 
 	/* Verify fs_write() */
 	brw = fs_write(filep, (char *)test_str, strlen(test_str));
